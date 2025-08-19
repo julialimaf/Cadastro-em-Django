@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Usuários</title>
+</head>
+<body>
+    <h1>Usuários Cadastrados</h1>
+
+    {% if erro %}
+        <p style="color:red;">{{ erro }}</p>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="nome">
+        <label for="idade">Idade:</label>
+        <input type="number" name="idade" id="idade">
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <hr>
+
+    {% for usuario in usuarios %}
+        <p><strong>Nome:</strong> {{ usuario.nome }}</p>
+        <p><strong>Idade:</strong> {{ usuario.idade }}</p>
+        <hr>
+    {% empty %}
+        <p>Nenhum usuário cadastrado ainda.</p>
+    {% endfor %}
+</body>
+</html>
